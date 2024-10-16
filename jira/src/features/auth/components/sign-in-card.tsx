@@ -1,4 +1,5 @@
 import { z } from "zod";
+import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -94,7 +95,7 @@ export const SignInCard  = () => {
             <div className="px-7">
                 <DottedSeparator />
             </div>
-            <CardContent className="p-7 fles-col gap-y-4">
+            <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button 
                 disabled={false}
                 variant="secondary"
@@ -105,6 +106,7 @@ export const SignInCard  = () => {
                         Login with Google
                     </Button>
                         <Button 
+                        disabled = {false}
                         variant="secondary"
                         size="lg"
                         className="w-full"
@@ -112,6 +114,17 @@ export const SignInCard  = () => {
                     <FaGithub />
                     Login with Github
                 </Button>
+            </CardContent>
+            <div className="px-7">
+                <DottedSeparator />
+            </div>
+            <CardContent className="p-7 flex items-center justify-center">
+                <p>
+                    Don&apos;t have an account?
+                    <Link href="sign-up">
+                        <span className="text-blue-700">&nbsp;Sign Up</span>
+                    </Link>
+                </p>
             </CardContent>
         </Card>
     );

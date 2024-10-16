@@ -125,7 +125,7 @@ export const SignUpCard  = () => {
             <div className="px-7">
                 <DottedSeparator />
             </div>
-            <CardContent className="p-7 fles-col gap-y-4">
+            <CardContent className="p-7 flex flex-col gap-y-4">
                 <Button 
                 variant="secondary"
                 size="lg"
@@ -142,6 +142,17 @@ export const SignUpCard  = () => {
                     <FaGithub />
                     Login with Github
                 </Button>
+            </CardContent>
+            <div className="px-7">
+                <DottedSeparator />
+            </div>
+            <CardContent className="p-7 flex items-center justify-center">
+                <p>
+                    Already have an account?
+                    <Link href="sign-in">
+                        <span className="text-blue-700">&nbsp;Sign In</span>
+                    </Link>
+                </p>
             </CardContent>
         </Card>
     );
