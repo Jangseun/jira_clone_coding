@@ -23,8 +23,8 @@ import {
 
 const formSchema = z.object({
     email: z.string().email(),
-    password: z.string()
-})
+    password: z.string().min(1, "Required"),
+});
 
 
 export const SignInCard  = () => {
@@ -35,6 +35,10 @@ export const SignInCard  = () => {
             password: ""
         },
     });
+
+    const onSubmit = (values: z.infer<typeof formSchema>) => {
+        console.log({ values });
+    }
 
     return ( 
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">
@@ -48,29 +52,38 @@ export const SignInCard  = () => {
             </div>
             <CardContent className="p-7">
                 <Form {...form}>
-                <form className="space-y-4">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                     <FormField 
-                        render={{{ field }} => (
-                            <input 
-                                required
-                                type="email"
-                                value={""}
-                                onChange={() => {}}
-                                placeholder="Enter email address"
-                                disabled={false}
-                            />
+                        name="email"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type="email"
+                                        placeholder="Enter email address"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
                         )}
                     />
-                    
-                    <input 
-                        required
-                        type="password"
-                        value={""}
-                        onChange={() => {}}
-                        placeholder="Enter password"
-                        disabled={false}
-                        min={8}
-                        max={256}
+                    <FormField 
+                        name="password"
+                        control={form.control}
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormControl>
+                                    <Input
+                                        {...field}
+                                        type="password"
+                                        placeholder="Enter password"
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
                     />
                     <Button disabled={false} size="lg" className="w-full">
                         Login

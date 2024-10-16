@@ -1,6 +1,11 @@
+import { z } from "zod";
 import Link from "next/link";
 import {FcGoogle} from "react-icons/fc";
 import {FaGithub} from "react-icons/fa";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
@@ -11,6 +16,14 @@ import {
     CardHeader,
     CardTitle
 }from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage,
+} from "@/components/ui/form";
 
 export const SignUpCard  = () => {
     return ( 
@@ -35,7 +48,7 @@ export const SignUpCard  = () => {
             </div>
             <CardContent className="p-7">
                 <form className="space-y-4">
-                    <input 
+                    <Input 
                         required
                         type="text"
                         value={""}
@@ -43,7 +56,7 @@ export const SignUpCard  = () => {
                         placeholder="Enter your name"
                         disabled={false}
                     />
-                    <input 
+                    <Input 
                         required
                         type="email"
                         value={""}
@@ -51,7 +64,7 @@ export const SignUpCard  = () => {
                         placeholder="Enter email address"
                         disabled={false}
                     />
-                    <input 
+                    <Input 
                         required
                         type="password"
                         value={""}
