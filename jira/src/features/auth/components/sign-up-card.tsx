@@ -1,6 +1,6 @@
+import Link from "next/link";
 import {FcGoogle} from "react-icons/fc";
 import {FaGithub} from "react-icons/fa";
-import Link from "next/link";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Button } from "@/components/ui/button";
@@ -24,9 +24,10 @@ export const SignUpCard  = () => {
                 <Link href="/privacy">
                     <span className="text-blue-700">Privacy Plicy</span>
                 </Link>{" "}
-                <Link href="/privacy">
-                    <span className="text-blue-700">Privacy Plicy</span>
-                </Link>{" "}
+                and{""}
+                <Link href="/terms">
+                    <span className="text-blue-700">Terms of Service</span>
+                </Link>
                 </CardDescription>
             </CardHeader>
             <div className="px-7">
@@ -34,6 +35,14 @@ export const SignUpCard  = () => {
             </div>
             <CardContent className="p-7">
                 <form className="space-y-4">
+                    <input 
+                        required
+                        type="text"
+                        value={""}
+                        onChange={() => {}}
+                        placeholder="Enter your name"
+                        disabled={false}
+                    />
                     <input 
                         required
                         type="email"
