@@ -10,7 +10,7 @@ interface AuthLayoutProps {
     children: React.ReactNode;
 }
 
-const AuthLayout = ({ children }: AuthLayoutProps) => {
+const AuthLayout = ({ children }: AuthLayoutProps) => {  
     const pathname = usePathname();
     const isSignIn = pathname === "/sign-in";
 
@@ -26,7 +26,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
                     </Button>
                 </nav>
                 <div className="flex flex-col items-center justify-senter pt-4 md:pt-14">
-                    {children}
+                    {children}  
                 </div>
             </div>
         </main>

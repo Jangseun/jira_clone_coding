@@ -102,7 +102,9 @@ export const SignInCard  = () => {
                 size="lg"
                 className="w-full"
                 >
-                    <FcGoogle />
+                    <div className = "mr-2 size-5">
+                        <FcGoogle size="full"/>
+                    </div>
                         Login with Google
                     </Button>
                         <Button 
@@ -111,7 +113,10 @@ export const SignInCard  = () => {
                         size="lg"
                         className="w-full"
                     >
-                    <FaGithub />
+                        
+                    <div className = "mr-2 size-5">
+                        <FaGithub size="full"/>
+                    </div>
                     Login with Github
                 </Button>
             </CardContent>
