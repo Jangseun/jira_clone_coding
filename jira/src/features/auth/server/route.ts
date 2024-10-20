@@ -20,11 +20,11 @@ const app = new Hono()
         "/register",
         zValidator("json", registerSchema),
         async (c) => {
-            const { email, password } = c.req.valid("json");
+            const { name, email, password } = c.req.valid("json");
 
-            console.log({ email, password });
+            console.log({ name, email, password });
 
-            return c.json({ email, password });
+            return c.json({ name, email, password });
         }
     )
 
