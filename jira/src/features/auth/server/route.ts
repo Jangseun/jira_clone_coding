@@ -6,10 +6,10 @@ import { loginSchema } from "../schema";
 
 const app = new Hono()
     .post(
-        "/login",
+        "/login/:userId",
         zValidator("json", loginSchema),
          (c) => {
-        return c.json({ success: "ok"});
+        return c.json({ success: 1234});
         }
     );
 
