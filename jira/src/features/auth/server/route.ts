@@ -3,6 +3,8 @@ import { Hono } from "hono";
 import { zValidator } from "@hono/zod-validator";
 
 import { loginSchema, registerSchema } from "../schema";
+import { createAdminClient } from "@/lib/appwrite";
+import { ID } from "node-appwrite";
 
 const app = new Hono()
     .post(
@@ -22,7 +24,9 @@ const app = new Hono()
         async (c) => {
             const { name, email, password } = c.req.valid("json");
 
-            console.log({ name, email, password });
+            const { account } = await createAdminClient();
+
+            await account.create(ID.unique(), email, password, name);
 
             return c.json({ name, email, password });
         }
