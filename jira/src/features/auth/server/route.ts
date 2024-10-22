@@ -5,6 +5,7 @@ import { zValidator } from "@hono/zod-validator";
 import { loginSchema, registerSchema } from "../schema";
 import { createAdminClient } from "@/lib/appwrite";
 import { ID } from "node-appwrite";
+import { deleteCookie, setCookie } from "hono/cookie"
 
 const app = new Hono()
     .post(
@@ -27,6 +28,8 @@ const app = new Hono()
             const { account } = await createAdminClient();
 
             await account.create(ID.unique(), email, password, name);
+
+            
 
             return c.json({ name, email, password });
         }
