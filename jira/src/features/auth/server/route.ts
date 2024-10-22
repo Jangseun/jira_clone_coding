@@ -6,6 +6,7 @@ import { loginSchema, registerSchema } from "../schema";
 import { createAdminClient } from "@/lib/appwrite";
 import { ID } from "node-appwrite";
 import { deleteCookie, setCookie } from "hono/cookie"
+import { AUTH_COOKIE } from "../constans";
 
 const app = new Hono()
     .post(
@@ -14,7 +15,17 @@ const app = new Hono()
          async (c) => {
             const { email, password } = c.req.valid("json");
 
-            console.log({ email, password });
+            const { account } = await createAdminClient();
+
+            const session = await account.createEmailPasswordSession(email, password);
+            
+            setCookie(c, AUTH_COOKIE, session.secret, {
+                path: "/",
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+                maxAge: 60 * 60 * 24 * 30,
+            });
 
         return c.json({ email, password });
         }
@@ -29,11 +40,22 @@ const app = new Hono()
 
             await account.create(ID.unique(), email, password, name);
 
+            const session = await account.createEmailPasswordSession(email, password);
             
+            setCookie(c, AUTH_COOKIE, session.secret, {
+                path: "/",
+                httpOnly: true,
+                secure: true,
+                sameSite: "strict",
+                maxAge: 60 * 60 * 24 * 30,
+            });
 
             return c.json({ name, email, password });
-        }
-    )
+        })
+        .post("/logout", (c) => {
+            deleteCookie(c, AUTH_COOKIE);
+            return c.json({success: "ok"});
+        })
 
 export default app;
 
