@@ -49,7 +49,7 @@ export const sessionMiddleware = createMiddleware<Additionalcontext>(
         const user = await account.get();
 
         c.set("account", account);
-        c.set("datavases", datavases);
+        c.set("databases", datavases);
         c.set("storage", storage);
         c.set("user", user);
 
