@@ -16,6 +16,7 @@ import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
 
 import { AUTH_COOKIE } from "@/features/auth/constans";
+import { create } from "domain";
 
 export const sessionMiddleware = createMiddleware{
     async (c, next) => {
@@ -24,5 +25,11 @@ export const sessionMiddleware = createMiddleware{
         .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
 
         const session = getCookie(c, AUTH_COOKIE);
+
+        if (!session) {
+            return c.json({ error: "Unauthorized", 401});
+        }
+
+        client.setSession(session);
     },
 }
