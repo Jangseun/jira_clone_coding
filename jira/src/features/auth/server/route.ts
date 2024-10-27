@@ -15,7 +15,7 @@ const app = new Hono()
         "/current",
         sessionMiddleware,
         (c) => {
-            const user - c.get("user");
+            const user = c.get("user");
 
             return c.json({ data : user});
         }
