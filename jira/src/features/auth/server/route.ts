@@ -53,6 +53,7 @@ const app = new Hono()
         })
         .post("/logout", (c) => {
             deleteCookie(c, AUTH_COOKIE);
+            
             return c.json({success: "ok"});
         })
 
