@@ -1,12 +1,14 @@
 import { z } from "zod";
 import { Hono } from "hono";
-import { zValidator } from "@hono/zod-validator";
-
-import { loginSchema, registerSchema } from "../schema";
-import { createAdminClient } from "@/lib/appwrite";
 import { ID } from "node-appwrite";
 import { deleteCookie, setCookie } from "hono/cookie"
+import { zValidator } from "@hono/zod-validator";
+
+import { createAdminClient } from "@/lib/appwrite";
+import { sessionMiddleware } from "@/lib/session-middleware";
+
 import { AUTH_COOKIE } from "../constans";
+import { loginSchema, registerSchema } from "../schema";
 
 const app = new Hono()
     .post(
@@ -51,11 +53,11 @@ const app = new Hono()
 
             return c.json({ name, email, password });
         })
-        .post("/logout", (c) => {
+        .post("/logout", sessionMiddleware, (c) => {
             deleteCookie(c, AUTH_COOKIE);
-            
+
             return c.json({success: "ok"});
-        })
+        });
 
 export default app;
 

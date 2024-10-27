@@ -16,9 +16,19 @@ import { getCookie } from "hono/cookie";
 import { createMiddleware } from "hono/factory";
 
 import { AUTH_COOKIE } from "@/features/auth/constans";
-import { create } from "domain";
 
-export const sessionMiddleware = createMiddleware{
+
+type Additionalcontext = {
+    Variables: {
+        account: AccountType;
+        databases: DatabasesType;
+        storage: StorageType;
+        users: UsersType;
+        user: Models.User<Models.Preferences>;
+    };
+};
+
+export const sessionMiddleware = createMiddleware<Additionalcontext>(
     async (c, next) => {
         const client = new Client()
         .setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
@@ -27,9 +37,22 @@ export const sessionMiddleware = createMiddleware{
         const session = getCookie(c, AUTH_COOKIE);
 
         if (!session) {
-            return c.json({ error: "Unauthorized", 401});
+            return c.json({ error: "Unauthorized"}, 401);
         }
 
         client.setSession(session);
+
+        const account = new Account(client);
+        const datavases = new Databases(client);
+        const storage = new Storage(client);
+
+        const user = await account.get();
+
+        c.set("account", account);
+        c.set("datavases", datavases);
+        c.set("storage", storage);
+        c.set("user", user);
+
+        await next();
     },
-}
+);
