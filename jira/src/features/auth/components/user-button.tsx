@@ -1,6 +1,6 @@
 "use client"
 
-import { Loader } from "lucide-react";
+import { Loader, LogOut } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     DropdownMenu,
@@ -14,6 +14,7 @@ import { useLogout } from "../api/use-logout";
 import { useCurrent } from "../api/use-current";
 
 export const UserButton = () => {
+    const { mutate: logout } = useLogout();
     const { data: user, isLoading } = useCurrent();
 
     if(isLoading) {
@@ -58,6 +59,10 @@ export const UserButton = () => {
                     </div>
                 </div>
                 <DottedSeparator className="mb-1"/>
+                <DropdownMenuItem className="h--10 flex items-center justify-center text-amber-700 font-medium cursor-pointer">
+                    <LogOut className="size-4 mr-2" />
+                    Log out
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
