@@ -1,3 +1,4 @@
+import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType} from "hono";
 
@@ -7,6 +8,8 @@ type ResponseType = InferResponseType<typeof client.api.auth.login["$post"]>;
 type RequestType = InferRequestType<typeof client.api.auth.login["$post"]>;
 
 export const useLogin = () => {
+    const router = useRouter();
+
     const mutation = useMutation<
     ResponseType,
     Error,
@@ -16,6 +19,9 @@ export const useLogin = () => {
             const response = await client.api.auth.login["$post"]({ json });
             return await response.json();
         },
+        onSuccess: () => {
+            router.refresh();
+        }
     });
 
     return mutation;
