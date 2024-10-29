@@ -35,10 +35,12 @@ export const UserButton = () => {
         : email.charAt(0).toUpperCase() ?? "U";
 
     return (
-        <Avatar className="size-10 hover:ipacity-75 transition border border-neutral-300">
-            <AvatarFallback className="bg-neutral-200 font-medium text-neutral-500 flex items-center justify-center">
-                {avatarFallback}
-            </AvatarFallback>
-        </Avatar>
+        <DropdownMenu modal={false}>
+            <Avatar className="size-10 hover:ipacity-75 transition border border-neutral-300">
+                <AvatarFallback className="bg-neutral-200 font-medium text-neutral-500 flex items-center justify-center">
+                    {avatarFallback}
+                </AvatarFallback>
+            </Avatar>
+        </DropdownMenu>
     )
 };
