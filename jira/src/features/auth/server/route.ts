@@ -11,7 +11,7 @@ import { AUTH_COOKIE } from "../constans";
 import { loginSchema, registerSchema } from "../schema";
 
 const app = new Hono()
-    .get(
+    .get(                   
         "/current",
         sessionMiddleware,
         (c) => {
@@ -22,14 +22,14 @@ const app = new Hono()
     )
     .post(
         "/login",
-        zValidator("json", loginSchema),
+        zValidator("json", loginSchema), //zva 어쩌구 애는 타입검증
          async (c) => {
-            const { email, password } = c.req.valid("json");
-
+            const { email, password } = c.req.valid("json");  //유저가 우리에게 보내오는 정보 req 리쿼스트
+                                                                 //우리가 유저에게 보내면 리스폰스
             const { account } = await createAdminClient();
-            const session = await account.createEmailPasswordSession(email, password);
+            const session = await account.createEmailPasswordSession(email, password); 
             
-            setCookie(c, AUTH_COOKIE, session.secret, {
+            setCookie(c, AUTH_COOKIE, session.secret, {  //secet : 애는 암호화
                 path: "/",
                 httpOnly: true,
                 secure: true,
@@ -66,7 +66,7 @@ const app = new Hono()
             const account = c.get("account");
 
             deleteCookie(c, AUTH_COOKIE);
-            await account.deleteSession("current");
+            await account.deleteSession("current");    // 세션 삭제
 
             return c.json({success: "ok"});
         });
