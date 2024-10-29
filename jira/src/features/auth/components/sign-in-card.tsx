@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
