@@ -22,14 +22,14 @@ const app = new Hono()
     )
     .post(
         "/login",
-        zValidator("json", loginSchema), //zva 어쩌구 애는 타입검증
+        zValidator("json", loginSchema), 
          async (c) => {
-            const { email, password } = c.req.valid("json");  //유저가 우리에게 보내오는 정보 req 리쿼스트
-                                                                 //우리가 유저에게 보내면 리스폰스
+            const { email, password } = c.req.valid("json");  
+           
             const { account } = await createAdminClient();
             const session = await account.createEmailPasswordSession(email, password); 
             
-            setCookie(c, AUTH_COOKIE, session.secret, {  //secet : 애는 암호화
+            setCookie(c, AUTH_COOKIE, session.secret, { 
                 path: "/",
                 httpOnly: true,
                 secure: true,
@@ -66,7 +66,7 @@ const app = new Hono()
             const account = c.get("account");
 
             deleteCookie(c, AUTH_COOKIE);
-            await account.deleteSession("current");    // 세션 삭제
+            await account.deleteSession("current");   
 
             return c.json({success: "ok"});
         });
