@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MenuIcon } from "lucide-react";
 
 import { Sidebar } from "./sidebar";
@@ -11,6 +11,10 @@ import { usePathname } from "next/navigation";
 export const MobileSidebar = () => {
     const [isOpen, setOpoen] = useState(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+
+    },[pathname]);
     return(
         <Sheet modal={false}>
             <SheetTrigger asChild>
