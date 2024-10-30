@@ -1,4 +1,5 @@
-import { Sidebar } from "lucide-react";
+import { Sidebar } from "@/components/ui/sidebar";
+
 
 interface DashboardLayoutProps {
     children: React.ReactNode;
