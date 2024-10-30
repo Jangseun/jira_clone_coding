@@ -1,3 +1,5 @@
+import { Sidebar } from "lucide-react";
+
 interface DashboardLayoutProps {
     children: React.ReactNode;
 };
@@ -7,8 +9,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
     return (
         <div className="min-h-screen">
             <div className="flex w-full h-full">
-                <div className="flixed left-0 hidden lg:block lg:w-[264px]">
-
+                <div className="flixed left-0 hidden lg:block lg:w-[264px] h-full overflow-auto">
+                    <Sidebar />
                 </div>
                 <div className="lg:pl-[264px]">
                     <div className="mx-auto max-w-screen-2xl h-full">
