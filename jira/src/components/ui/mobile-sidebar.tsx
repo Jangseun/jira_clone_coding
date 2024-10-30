@@ -9,14 +9,15 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { usePathname } from "next/navigation";
 
 export const MobileSidebar = () => {
-    const [isOpen, setOpoen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
 
     useEffect(() => {
+        setIsOpen(false);
+    }, [pathname]);
 
-    },[pathname]);
     return(
-        <Sheet modal={false}>
+        <Sheet modal={false} open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
                 <Button variant="secondary" className="lg:hidden">
                     <MenuIcon className="size-4 text-neutral-500" />
