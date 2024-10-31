@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Navigation } from "./navigation"
-import { DottedSeparator } from "../dotted-separator";
+import { DottedSeparator } from "./dotted-separator";
 
 export const Sidebar = () => {
     return (
